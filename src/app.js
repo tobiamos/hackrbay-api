@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => { //eslint-disable-line
-  if (config.env !== 'test') {
+  if (config.env === 'test') {
     logger.error(`Internal Server Error ${err}`);
   }
   if (err.isBoom) {
