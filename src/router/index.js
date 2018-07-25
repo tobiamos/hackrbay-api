@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const userRoutes = require('../modules/User/routes');
+const patchRoutes = require('../modules/Patch/routes');
 const { sendJSONResponse } = require('../helpers');
 
 router.get('/', (req, res) => {
@@ -10,6 +11,6 @@ router.get('/', (req, res) => {
 });
 
 router.use('/user', userRoutes);
-
+router.use('/patch', patchRoutes);
 
 module.exports = router;
