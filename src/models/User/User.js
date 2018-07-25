@@ -5,7 +5,7 @@ const { secret } = require('../../config');
 
 const UserSchema = new mongoose.Schema({
   username: {
-    type: String, lowercase: true, trim: true, required: true,
+    type: String, lowercase: true, trim: true, required: 'Please provide a username',
   },
   salt: String,
   hash: String,
