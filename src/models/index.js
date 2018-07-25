@@ -32,3 +32,6 @@ mongoose.connection.on('error', (err) => {
 mongoose.connection.on('disconnected', () => {
   logger.info(chalk.error('Disconnected From '), DBURI);
 });
+
+
+require('./User/User');

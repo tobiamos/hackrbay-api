@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const { randomBytes, pbkdf2Sync } = require('crypto');
+const { promisify } = require('util');
+const { secret }
 
 const UserSchema = new mongoose.Schema({
   name: {
