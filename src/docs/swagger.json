@@ -1,0 +1,13 @@
+{
+  "swagger": "3.0",
+  "info": {
+    "version": "2.0.0",
+    "title": "HackerBay Test Api",
+    "description": "Api for HackerBay Backend Test"
+  },
+  "servers": ["localhost:4000"],
+  "basePath": "/api/v1",
+  "schemes": ["http", "https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"]
+}
