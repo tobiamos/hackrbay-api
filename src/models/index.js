@@ -12,6 +12,7 @@ const options = {
   reconnectInterval: 500,
   poolSize: 10,
   bufferMaxEntries: 0,
+  useNewUrlParser: true,
 };
 
 mongoose.connect(DBURI, options);
@@ -24,9 +25,7 @@ mongoose.connection.on('connected', () => {
 });
 
 mongoose.connection.on('error', (err) => {
-  logger.info(chalk.error('ERRROR CONNECTING'), {
-    err,
-  });
+  logger.info(chalk.error('ERRROR CONNECTING'), { err });
 });
 
 mongoose.connection.on('disconnected', () => {
