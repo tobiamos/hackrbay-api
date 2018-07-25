@@ -27,7 +27,7 @@ module.exports.login = async (req, res) => {
 module.exports.authenticate = async (req, res, next) => {
   const token = req.headers.authorization;
   if (!token) {
-    return sendJSONResponse(res, 403, null, req.method, 'Authorization token is required');
+    return sendJSONResponse(res, 401, null, req.method, 'Authorization token is required');
   }
   const decoded = await verifyPromise(token, secret);
   req.decoded = decoded;
