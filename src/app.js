@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 const apiRoutes = require('./router');
-const docs = require('./docs/swagger');
+const docs = require('./docs/swagger.js');
 
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(docs));
 app.use('/api/v1', apiRoutes);
