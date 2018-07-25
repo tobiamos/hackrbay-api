@@ -6,7 +6,7 @@ const User = mongoose.model('User');
 
 module.exports.login = async (req, res) => {
   const { username, password } = req.body;
-  const existingUser = await User.findOne({ username: username.toLowercase() });
+  const existingUser = await User.findOne({ username });
   if (!existingUser) {
     const user = new User();
     user.username = username;
