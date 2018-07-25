@@ -3,8 +3,13 @@ const validateMime = require('image-type');
 const http = require('https');
 const path = require('path');
 const imageDownloader = require('image-downloader');
+const sharp = require('sharp');
+const { promisify } = require('util');
+const rimraf = require('rimraf');
 const { sendJSONResponse } = require('../../../helpers');
 const { imageTypes } = require('../../../utils/validMimeTypes');
+
+const unlinkPromise = promisify(rimraf);
 
 
 module.exports.validateUrl = (req, res, next) => {
@@ -18,9 +23,7 @@ module.exports.validateUrl = (req, res, next) => {
 module.exports.checkUrlExtenstion = (req, res, next) => {
   const { imageUrl } = req.body;
   const validImageTypes = Object.keys(imageTypes);
-  console.log(validImageTypes);
   const result = validImageTypes.map(extention => imageUrl.toLowerCase().endsWith(extention));
-  console.log(result);
   if (result.includes(true)) {
     return next();
   }
@@ -54,6 +57,16 @@ module.exports.downloadImage = async (req, res) => {
     dest: path.join(`src/public/${Date.now()}.${req.result.ext}`),
   };
   const result = await imageDownloader.image(options);
-  const link = `${req.protocol}://${req.headers.host}/${result.filename.split('\\')[2]}`;
-  return sendJSONResponse(res, 200, link, req.method, 'DOWNLOADED IMAGE URL');
+  const tempLink = `${req.protocol}://${req.headers.host}/${result.filename.split('\\')[2]}`;
+  await sharp(`src/public/${tempLink.split('/')[3]}`)
+    .resize(50)
+    .toFile(`src/public/small-${tempLink.split('/')[3]}`);
+  const link = `${req.protocol}://${req.headers.host}/small-${tempLink.split('/')[3]}`;
+  const filePath = path.join(`src/public/${tempLink.split('/')[3]}`);
+  try {
+    await unlinkPromise(filePath);
+  } catch (error) {
+    await unlinkPromise(filePath);
+  }
+  sendJSONResponse(res, 200, link, req.method, 'DOWNLOADED IMAGE URL');
 };
