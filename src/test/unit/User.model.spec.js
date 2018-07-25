@@ -1,6 +1,10 @@
 const { expect } = require('chai');
+const { verify } = require('jsonwebtoken');
+const { promisify } = require('util');
 const User = require('../../models/User/User');
-
+const { validAdmin } = require('../factory');
+const { secret } = require('../../config');
+const verifyPromise = promisify(verify);
 describe('User', () => {
   it('Should be invalid if name is empty', async() => {
     try {
@@ -42,5 +46,16 @@ describe('User', () => {
     expect(result).to.be.a('boolean');
     expect(result).to.be.false;
     done();
+  });
+
+  it('Should create a valid json web token', async() => {
+    try {
+      const user = new User(validAdmin());
+      const token = user.generateJWT();
+      const decoded = await verifyPromise(token, secret);
+      expect(decoded.username).to.equal(validAdmin().username.toLowerCase());
+    } catch (error) {
+      throw error;
+    }
   });
 });

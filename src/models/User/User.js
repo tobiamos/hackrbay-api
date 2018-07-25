@@ -25,7 +25,7 @@ UserSchema.methods.generateJWT = function token() {
   return jwt.sign(
     {
       _id: this._id,
-      name: this.name,
+      username: this.username,
     },
     secret,
     {
