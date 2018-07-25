@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
+const { verify } = require('jsonwebtoken');
+const { promisify } = require('util');
 const { sendJSONResponse } = require('../../../helpers');
+const { secret } = require('../../../config');
+
+const verifyPromise = promisify(verify);
 
 const User = mongoose.model('User');
 
@@ -17,4 +22,14 @@ module.exports.login = async (req, res) => {
   }
   const token = existingUser.generateJWT();
   return sendJSONResponse(res, 201, token, req.method, `Welcome Back ${existingUser.username}`);
+};
+
+module.exports.authenticate = async (req, res, next) => {
+  const token = req.headers.authorization;
+  if (!token) {
+    return sendJSONResponse(res, 403, null, req.method, 'Authorization token is required');
+  }
+  const decoded = await verifyPromise(token, secret);
+  req.decoded = decoded;
+  return next();
 };

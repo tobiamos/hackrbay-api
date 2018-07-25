@@ -32,11 +32,14 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => { //eslint-disable-line
   if (config.env !== 'test') {
-    logger.error(`Internal Server Error ${err}`);
+    logger.error(`Internal Server Error ${err.name}`);
   }
   if (err.isBoom) {
     const { message } = err.data[0];
     return sendJSONResponse(res, err.output.statusCode, null, req.method, message);
+  }
+  if (err.name === 'JsonWebTokenError') {
+    return sendJSONResponse(res, 403, null, req.method, 'Authorization token is invalid');
   }
   if (err.status === 404) {
     return sendJSONResponse(
