@@ -1,0 +1,150 @@
+{
+  "patch": {
+    "tags": ["Rides"],
+    "description": "Patch JSON body",
+    "parameters": [
+      {
+        "name": "json patch",
+        "in": "body",
+        "description": "request payload",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "jsonbody": {
+              "type": "object",
+              "properties": {
+                "baz": {
+                  "type": "string",
+                  "example": "qux"
+                },
+                "foo": {
+                  "type": "string",
+                  "example": "bar"
+                }
+              }
+            },
+            "jsonpatch": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "op": {
+                    "type": "string",
+                    "example": "replace"
+                  },
+                  "path": {
+                    "type": "string",
+                    "example": "/baz"
+                  },
+                  "value": {
+                    "type": "string",
+                    "example": "boo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "name": "authorization",
+        "in": "header",
+        "description": "token",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "Authorization": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YWQzZjMyZTE3NDg4NzU2OWJiZjkyZjIiLCJuYW1lIjoiQWxpeXUgQWJkdWxsYWhpIiwiZW1haWwiOiJhbGl5dUBnb2thZGEubmciLCJ1c2VyVHlwZSI6ImRyaXZlciIsImV4cCI6MTUyNDc0MDc5OCwiaWF0IjoxNTI0MTM1OTk4fQ.184zo6bcfQNc9P6P2x75g3SiJPLOyFf35XFPp4mls1k"
+            }
+          }
+        }
+      }
+    ],
+    "produces": ["application/json"],
+    "responses": {
+      "200": {
+        "description": "Sucessful Json Patch",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 200
+            },
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "message": {
+              "type": "string",
+              "example": "Patch applied successfully!"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "baz": {
+                  "type": "string",
+                  "example": "boo"
+                },
+                "foo": {
+                  "type": "string",
+                  "example": "bar"
+                }
+              }
+              
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "no drivers available",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 401
+            },
+            "method": {
+              "type": "string",
+              "example": "PATCH"
+            },
+            "message": {
+              "type": "string",
+              "example": "Authorization token is invalid"
+            },
+            "data": {
+              "type": "string",
+              "example": "null"
+            }
+          }
+        }
+      },
+      "403": {
+        "description": "no drivers available",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 403
+            },
+            "method": {
+              "type": "string",
+              "example": "PATCH"
+            },
+            "message": {
+              "type": "string",
+              "example": "Authorization token is required"
+            },
+            "data": {
+              "type": "string",
+              "example": "null"
+            }
+          }
+        }
+      }
+    }
+  }
+}
