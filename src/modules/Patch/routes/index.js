@@ -8,8 +8,8 @@ const { authenticate } = require('../../User/controllers');
 const router = express.Router();
 router.patch(
   '/',
-  expressValidator(validatePatch.patch),
   catchErrors(authenticate),
+  expressValidator(validatePatch.patch),
   jsonPatchController.performPatch,
 );
 

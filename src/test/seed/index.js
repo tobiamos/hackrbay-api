@@ -15,3 +15,11 @@ module.exports.createUser = (done) => {
   return Promise.all([userPromise]);
 }).then(() => done());
 }
+
+module.exports.getAuthToken = () => {
+  const user = new User();
+  user.username = validUser().username;
+  user.hashPassword = validUser().password;
+  const token = user.generateJWT();
+  return { token }
+};

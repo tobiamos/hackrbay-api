@@ -41,6 +41,9 @@ app.use((err, req, res, next) => { //eslint-disable-line
   if (err.name === 'JsonWebTokenError') {
     return sendJSONResponse(res, 403, null, req.method, 'Authorization token is invalid');
   }
+  if (err.name === 'TokenExpiredError') {
+    return sendJSONResponse(res, 403, null, req.method, 'Authorization token is expired');
+  }
   if (err.status === 404) {
     return sendJSONResponse(
       res,

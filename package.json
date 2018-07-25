@@ -39,6 +39,7 @@
     "joi-nochange": "^3.0.0",
     "jsonpatch": "^3.0.1",
     "jsonwebtoken": "^8.3.0",
+    "mongodb": "^3.1.1",
     "mongoose": "^5.2.5",
     "morgan": "^1.9.0",
     "pmx": "^1.6.7",
