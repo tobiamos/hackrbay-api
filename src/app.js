@@ -1,5 +1,6 @@
 require('dotenv').config({ path: '.env' });
 const express = require('express');
+const path = require('path');
 const morgan = require('morgan');
 const swaggerUi = require('swagger-ui-express');
 const config = require('./config');
@@ -21,6 +22,7 @@ app.use(express.json());
 const apiRoutes = require('./router');
 const docs = require('./docs/swagger.js');
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(docs));
 app.use('/api/v1', apiRoutes);
 
@@ -32,7 +34,7 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => { //eslint-disable-line
   if (config.env !== 'test') {
-    logger.error(`Internal Server Error ${err.name}`);
+    logger.error(`Internal Server Error ${err}`);
   }
   if (err.isBoom) {
     const { message } = err.data[0];
