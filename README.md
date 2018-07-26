@@ -4,7 +4,7 @@ Api for hackerbay backend test
 
 ## setup
 
-- clone this repo with `git clone https://github.com/tobiamos/hackrbay-api`
+- clone this repo with `git clone https://github.com/tobiamos/hackrbay-api.git`
 
 - nagivate into the folder and run ```js npm install```
 
