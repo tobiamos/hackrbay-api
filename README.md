@@ -14,3 +14,4 @@ Api for hackerbay backend test
 - to run the test suite run `npm test`
 - to run coverage run `npm run coverage`
 - to lint the project run `npm run lint`
+- to access the docs navigate to `localhost:port/api/v1/docs`
