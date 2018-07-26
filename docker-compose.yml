@@ -1,19 +1,9 @@
 version: '3'
 services:
-  mongo:
-    container_name: mongo
-    image: mongo:3.6
-    ports:
-      - "27017:27017"
-
-  app:
+   app:
     container_name: app
     build: .
     ports:
       - "4000:4000"
     volumes:
       - .:/src
-    links:
-      - mongo
-    depends_on:
-      - mongo
