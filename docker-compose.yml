@@ -8,8 +8,6 @@ services:
 
   app:
     container_name: app
-    env_file:
-      - .env
     build: .
     ports:
       - "4000:4000"
