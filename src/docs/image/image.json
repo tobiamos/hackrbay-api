@@ -1,0 +1,140 @@
+{
+  "post": {
+    "tags": ["ImageThumbNail"],
+    "description": "Generate Thumbnail from image url",
+    "parameters": [
+      {
+        "name": "json patch",
+        "in": "body",
+        "description": "request payload",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "imageUrl": {
+              "type": "string",
+              "example": "https://publicurl.png"
+            }
+          }
+        }
+      },
+      {
+        "name": "authorization",
+        "in": "header",
+        "description": "token",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "Authorization": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YWQzZjMyZTE3NDg4NzU2OWJiZjkyZjIiLCJuYW1lIjoiQWxpeXUgQWJkdWxsYWhpIiwiZW1haWwiOiJhbGl5dUBnb2thZGEubmciLCJ1c2VyVHlwZSI6ImRyaXZlciIsImV4cCI6MTUyNDc0MDc5OCwiaWF0IjoxNTI0MTM1OTk4fQ.184zo6bcfQNc9P6P2x75g3SiJPLOyFf35XFPp4mls1k"
+            }
+          }
+        }
+      }
+    ],
+    "produces": ["application/json"],
+    "responses": {
+      "200": {
+        "description": "Sucessful thumbnail generation",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 200
+            },
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "message": {
+              "type": "string",
+              "example": "Image thumbnail generated"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "thumbNailUrl": {
+                  "type": "string",
+                  "example": "http://ghhsjs.com/3hdsfsa.png"
+                }
+               }
+            }
+          }
+        }
+      },
+       "401": {
+         "description": "Authentication headers are required",
+         "schema": {
+           "type": "object",
+           "properties": {
+             "status": {
+               "type": "number",
+               "example": 401
+             },
+             "method": {
+               "type": "string",
+               "example": "POST"
+             },
+             "message": {
+               "type": "string",
+               "example": "Authorization token is invalid"
+             },
+             "data": {
+               "type": "string",
+               "example": "null"
+             }
+           }
+         }
+       },
+       "403": {
+         "description": "Authentication headers are invalid",
+         "schema": {
+           "type": "object",
+           "properties": {
+             "status": {
+               "type": "number",
+               "example": 403
+             },
+             "method": {
+               "type": "string",
+               "example": "POST"
+             },
+             "message": {
+               "type": "string",
+               "example": "Authorization token is required"
+             },
+             "data": {
+               "type": "string",
+               "example": "null"
+             }
+           }
+         }
+       },
+       "400": {
+         "description": "Url is not valid",
+         "schema": {
+           "type": "object",
+           "properties": {
+             "status": {
+               "type": "number",
+               "example": 400
+             },
+             "method": {
+               "type": "string",
+               "example": "POST"
+             },
+             "message": {
+               "type": "string",
+               "example": "Url is not a valid web url"
+             },
+             "data": {
+               "type": "string",
+               "example": "null"
+             }
+           }
+         }
+       }
+    }
+  }
+}

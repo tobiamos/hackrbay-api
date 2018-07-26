@@ -1,6 +1,6 @@
 {
   "patch": {
-    "tags": ["Rides"],
+    "tags": ["JsonPatch"],
     "description": "Patch JSON body",
     "parameters": [
       {
@@ -98,7 +98,7 @@
         }
       },
       "401": {
-        "description": "no drivers available",
+        "description": "Authentication headers are required",
         "schema": {
           "type": "object",
           "properties": {
@@ -122,7 +122,7 @@
         }
       },
       "403": {
-        "description": "no drivers available",
+        "description": "Authentication headers are invalid",
         "schema": {
           "type": "object",
           "properties": {
