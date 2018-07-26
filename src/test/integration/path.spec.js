@@ -18,7 +18,7 @@ describe('Patch', () => {
     it('should return a validation error if an authorization token is not passed in the headers', async () => {
       try {
        const result = await chai.request(app).patch(BASEURL).send({});
-       expect(result.body.status).to.equal(403);
+       expect(result.body.status).to.equal(401);
        expect(result.body.method).to.equal('PATCH');
        expect(result.body.message).to.equal('Authorization token is required');
        expect(result.body.data).to.be.null;

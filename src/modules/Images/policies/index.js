@@ -2,6 +2,6 @@ const joi = require('joi');
 
 module.exports.validateImageUrl = {
   body: {
-    imageUrl: joi.string().required(),
+    imageUrl: joi.string().min(6).required(),
   },
 };

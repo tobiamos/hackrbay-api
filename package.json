@@ -37,6 +37,7 @@
     "express-joi-validator": "^2.0.0",
     "image-downloader": "^3.4.1",
     "image-type": "^3.0.0",
+    "jimp": "^0.2.28",
     "joi": "^13.4.0",
     "joi-nochange": "^3.0.0",
     "jsonpatch": "^3.0.1",
