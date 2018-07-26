@@ -10,7 +10,7 @@ WORKDIR /src
 COPY package.json /src
 
 # Install node dependencies
-RUN npm install --production && npm install -g pm2
+RUN npm install  && npm install -g pm2
 
 # Copy entire file to docker
 COPY . /src
